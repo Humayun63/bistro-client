@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.chefServices{
+    background: url('../src/assets/home/chef-service.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    @apply px-4 py-12 flex items-center justify-center
+}
+.login-body{
+    background-image: url('./assets/others/authentication.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    @apply md:w-10/12 drop-shadow-2xl md:min-h-16 hero rounded-lg border-slate-200 border-2 
+}
