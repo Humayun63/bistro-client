@@ -8,7 +8,7 @@ const PopularMenu = ({ data }) => {
     useEffect(() => {
         const popularItems = data.filter(item => item.category === 'popular')
         setMenu(popularItems)
-        console.log(menu);
+        
     }, [data])
     return (
         <section>

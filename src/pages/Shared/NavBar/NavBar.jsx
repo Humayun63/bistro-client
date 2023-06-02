@@ -1,34 +1,44 @@
 import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../../../providers/AuthProvider';
+import useCart from '../../../hooks/useCart';
 
 const NavBar = () => {
-    const {user, logOut} = useContext(AuthContext)
+    const { user, logOut } = useContext(AuthContext)
+    const [,cart] = useCart()
 
-    const handleLogout = () =>{
+    const handleLogout = () => {
         logOut()
-        .then(()=>{
-            Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'Successfully logout!',
-                showConfirmButton: false,
-                timer: 1500
+            .then(() => {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Successfully logout!',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
             })
-        })
-        .catch(error =>{
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: `${error.message}`,
+            .catch(error => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: `${error.message}`,
+                })
             })
-        })
     }
 
     const navOptions = <>
-        <li><NavLink to='/'  className={({isActive})=> isActive ? 'text-orange-500 uppercase font-semibold' : 'text-white uppercase'} >Home</NavLink></li>
-        <li><NavLink to='/menu' className={({isActive})=> isActive ? 'text-orange-500 uppercase font-semibold' : 'text-white uppercase'} >our menu</NavLink></li>
-        <li><NavLink to='/order/salad' className={({isActive})=> isActive ? 'text-orange-500 uppercase font-semibold' : 'text-white uppercase'} >order food</NavLink></li>
+        <li><NavLink to='/' className={({ isActive }) => isActive ? 'text-orange-500 uppercase font-semibold' : 'text-white uppercase'} >Home</NavLink></li>
+        <li><NavLink to='/menu' className={({ isActive }) => isActive ? 'text-orange-500 uppercase font-semibold' : 'text-white uppercase'} >our menu</NavLink></li>
+        <li><NavLink to='/order/salad' className={({ isActive }) => isActive ? 'text-orange-500 uppercase font-semibold' : 'text-white uppercase'} >order food</NavLink></li>
+        <li>
+            <Link to='/'>
+                <button className="btn">
+                    Cart
+                    <div className="mx-2 badge badge-secondary">{cart.length}</div>
+                </button>
+            </Link>
+        </li>
     </>
 
     return (
@@ -43,7 +53,7 @@ const NavBar = () => {
                             {navOptions}
                         </ul>
                     </div>
-                   
+
                     <div className='uppercase btn-ghost mx-4'>
                         <p className='text-2xl font-bold'>bistro boss</p>
                         <p className='font-medium text-center text-base tracking-[0.38em]'>Restaurant</p>
@@ -56,12 +66,12 @@ const NavBar = () => {
                 </div>
                 <div className="navbar-end">
                     {
-                        user ? 
-                        <>
-                            <img src={user?.photoURL} alt={`${user?.displayName}`} title={user?.displayName}  className='w-16 rounded-full mx-4'/>
-                            <button className='btn' onClick={handleLogout}>LogOut</button>
-                        </> :
-                        <Link className='btn' to='login'>SignIn</Link>
+                        user ?
+                            <>
+                                <img src={user?.photoURL} alt={`${user?.displayName}`} title={user?.displayName} className='w-16 rounded-full mx-4' />
+                                <button className='btn' onClick={handleLogout}>LogOut</button>
+                            </> :
+                            <Link className='btn' to='login'>SignIn</Link>
                     }
                 </div>
             </div>

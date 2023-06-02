@@ -12,7 +12,7 @@ const Register = () => {
     const { registerUser,updateNamePhoto } = useContext(AuthContext)
 
     const onSubmit = data => {
-        console.log(data)
+       
         registerUser(data.email, data.password)
             .then(() => {
                 updateNamePhoto(data.name, data.photoURL)

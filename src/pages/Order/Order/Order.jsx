@@ -10,7 +10,7 @@ import { useParams } from 'react-router-dom';
 
 const Order = () => {
     const tabs = ['salad', 'pizza', 'soup', 'dessert', 'drinks']
-    const {category} = useParams()
+    const { category } = useParams()
     const initialIndex = tabs.indexOf(category);
     const [tabIndex, setTabIndex] = useState(initialIndex);
     const [items] = useMenu()
@@ -45,10 +45,7 @@ const Order = () => {
                             salad.map(item => (
                                 <Card
                                     key={item._id}
-                                    img={item.image}
-                                    name={item.name}
-                                    recipe={item.recipe}
-                                    price={item.price}
+                                    item={item}
                                 ></Card>
                             ))
                         }
@@ -60,10 +57,7 @@ const Order = () => {
                             pizza.map(item => (
                                 <Card
                                     key={item._id}
-                                    img={item.image}
-                                    name={item.name}
-                                    recipe={item.recipe}
-                                    price={item.price}
+                                    item={item}
                                 ></Card>
                             ))
                         }
@@ -75,10 +69,7 @@ const Order = () => {
                             soup.map(item => (
                                 <Card
                                     key={item._id}
-                                    img={item.image}
-                                    name={item.name}
-                                    recipe={item.recipe}
-                                    price={item.price}
+                                    item={item}
                                 ></Card>
                             ))
                         }
@@ -90,10 +81,7 @@ const Order = () => {
                             dessert.map(item => (
                                 <Card
                                     key={item._id}
-                                    img={item.image}
-                                    name={item.name}
-                                    recipe={item.recipe}
-                                    price={item.price}
+                                    item={item}
                                 ></Card>
                             ))
                         }
@@ -105,10 +93,7 @@ const Order = () => {
                             drinks.map(item => (
                                 <Card
                                     key={item._id}
-                                    img={item.image}
-                                    name={item.name}
-                                    recipe={item.recipe}
-                                    price={item.price}
+                                    item={item}
                                 ></Card>
                             ))
                         }

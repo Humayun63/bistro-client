@@ -7,7 +7,6 @@ const ChefRecommends = ({ data }) => {
     useEffect(() => {
         const selectedItems = data.filter(item => item.category === 'salad').slice(0, 3)
         setItems(selectedItems)
-        console.log(items)
     }, [data])
 
     return (
