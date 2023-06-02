@@ -14,3 +14,7 @@
     background-size: 100% 100%;
     @apply md:w-10/12 drop-shadow-2xl md:min-h-16 hero rounded-lg border-slate-200 border-2 
 }
+thead tr th{
+    background: #D1A054 !important;
+    color:#FFFFFF
+}
