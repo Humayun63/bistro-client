@@ -1,8 +1,10 @@
 import React from 'react';
 import { FaBars, FaCalendarAlt, FaEnvelope, FaHome, FaShoppingBag, FaShoppingCart, FaWallet } from 'react-icons/fa';
 import { NavLink, Outlet } from 'react-router-dom';
+import useCart from '../hooks/useCart';
 
 const Dashboard = () => {
+    const [, cart] = useCart()
     return (
         <>
 
@@ -30,7 +32,10 @@ const Dashboard = () => {
                         <li><NavLink className={({ isActive }) => isActive ? 'text-white text-lg uppercase' : 'uppercase text-lg'} to='/user'><FaHome></FaHome> User Home</NavLink></li>
                         <li><NavLink className={({ isActive }) => isActive ? 'text-white text-lg uppercase' : 'uppercase text-lg'} to='/reservation'><FaCalendarAlt></FaCalendarAlt> Reservation</NavLink></li>
                         <li><NavLink className={({ isActive }) => isActive ? 'text-white text-lg uppercase' : 'uppercase text-lg'} to='/payment'><FaWallet></FaWallet> Payment History</NavLink></li>
-                        <li><NavLink className={({ isActive }) => isActive ? 'text-white text-lg uppercase' : 'uppercase text-lg'} to='my-cart'><FaShoppingCart></FaShoppingCart> My Cart</NavLink></li>
+                        <li><NavLink className={({ isActive }) => isActive ? 'text-white text-lg uppercase' : 'uppercase text-lg'} to='my-cart'><FaShoppingCart></FaShoppingCart>
+                            My Cart
+                            <span className="mx-2 badge badge-secondary">{cart.length}</span>
+                        </NavLink></li>
 
                         <hr className='border-1 my-6' />
 
