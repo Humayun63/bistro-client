@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { FaFacebook, FaGithub, FaGoogle } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import loginImg from '../../assets/others/authentication2.png'
 import { useForm } from "react-hook-form";
 import { AuthContext } from '../../providers/AuthProvider';
@@ -9,31 +9,48 @@ import Swal from 'sweetalert2';
 
 const Register = () => {
     const { register, reset, handleSubmit, formState: { errors } } = useForm();
-    const { registerUser,updateNamePhoto } = useContext(AuthContext)
+    const { registerUser, updateNamePhoto } = useContext(AuthContext)
+    const navigate = useNavigate()
 
     const onSubmit = data => {
-       
+
         registerUser(data.email, data.password)
             .then(() => {
                 updateNamePhoto(data.name, data.photoURL)
-                .then(()=>{
-                    Swal.fire({
-                        position: 'center',
-                        icon: 'success',
-                        title: 'Register Success!',
-                        showConfirmButton: false,
-                        timer: 1500
+                    .then(() => {
+                        const loggedUser = { email: data.email, name: data.name }
+                        
+                        fetch('http://localhost:5000/users', {
+                            method: 'POST',
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify(loggedUser)
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.insertedId) {
+                                    Swal.fire({
+                                        position: 'center',
+                                        icon: 'success',
+                                        title: 'Register Success!',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
+                                    reset()
+                                    navigate('/')
+                                }
+                            })
+
                     })
-                    reset()
-                })
-                .catch(error =>{
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: `${error.message}`,
+                    .catch(error => {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: `${error.message}`,
+                        })
                     })
-                })
-                
+
             })
             .catch(error => {
                 Swal.fire({

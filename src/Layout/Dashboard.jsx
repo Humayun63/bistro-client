@@ -1,10 +1,12 @@
 import React from 'react';
-import { FaBars, FaCalendarAlt, FaEnvelope, FaHome, FaShoppingBag, FaShoppingCart, FaWallet } from 'react-icons/fa';
+import { FaBars, FaCalendarAlt, FaEnvelope, FaHome, FaList, FaShoppingBag, FaShoppingCart, FaUsers, FaUtensils, FaWallet } from 'react-icons/fa';
 import { NavLink, Outlet } from 'react-router-dom';
 import useCart from '../hooks/useCart';
 
 const Dashboard = () => {
     const [, cart] = useCart()
+    // TODO: load data from the server to have dynamic isAdmin based on data
+    const isAdmin = true;
     return (
         <>
 
@@ -29,13 +31,27 @@ const Dashboard = () => {
                             <span className='text-base text-[#151515] font-semibold tracking-[7px] text-center'>Restaurant</span>
                         </NavLink>
 
-                        <li><NavLink className={({ isActive }) => isActive ? 'text-white text-lg uppercase' : 'uppercase text-lg'} to='/user'><FaHome></FaHome> User Home</NavLink></li>
-                        <li><NavLink className={({ isActive }) => isActive ? 'text-white text-lg uppercase' : 'uppercase text-lg'} to='/reservation'><FaCalendarAlt></FaCalendarAlt> Reservation</NavLink></li>
-                        <li><NavLink className={({ isActive }) => isActive ? 'text-white text-lg uppercase' : 'uppercase text-lg'} to='/payment'><FaWallet></FaWallet> Payment History</NavLink></li>
-                        <li><NavLink className={({ isActive }) => isActive ? 'text-white text-lg uppercase' : 'uppercase text-lg'} to='my-cart'><FaShoppingCart></FaShoppingCart>
-                            My Cart
-                            <span className="mx-2 badge badge-secondary">{cart.length}</span>
-                        </NavLink></li>
+                        {
+                            isAdmin ? <>
+
+                                <li><NavLink className={({ isActive }) => isActive ? 'text-white text-lg uppercase' : 'uppercase text-lg'} to='/dashboard/admin'><FaHome></FaHome> Admin Home</NavLink></li>
+                                <li><NavLink className={({ isActive }) => isActive ? 'text-white text-lg uppercase' : 'uppercase text-lg'} to='/dashboard/add-items'><FaUtensils></FaUtensils> Add Items</NavLink></li>
+                                <li><NavLink className={({ isActive }) => isActive ? 'text-white text-lg uppercase' : 'uppercase text-lg'} to='/dashboard/manage-items'><FaList></FaList> Manage Items</NavLink></li>
+                                <li><NavLink className={({ isActive }) => isActive ? 'text-white text-lg uppercase' : 'uppercase text-lg'} to='/dashboard/all-users'><FaUsers></FaUsers> All Users</NavLink></li>
+                                
+
+                            </> : <>
+
+                                <li><NavLink className={({ isActive }) => isActive ? 'text-white text-lg uppercase' : 'uppercase text-lg'} to='/dashboard/user'><FaHome></FaHome> Users Home</NavLink></li>
+                                <li><NavLink className={({ isActive }) => isActive ? 'text-white text-lg uppercase' : 'uppercase text-lg'} to='/dashboard/reservation'><FaCalendarAlt></FaCalendarAlt> Reservation</NavLink></li>
+                                <li><NavLink className={({ isActive }) => isActive ? 'text-white text-lg uppercase' : 'uppercase text-lg'} to='/dashboard/payment'><FaWallet></FaWallet> Payment History</NavLink></li>
+                                <li><NavLink className={({ isActive }) => isActive ? 'text-white text-lg uppercase' : 'uppercase text-lg'} to='/dashboard/my-cart'><FaShoppingCart></FaShoppingCart>
+                                    My Cart
+                                    <span className="mx-2 badge badge-secondary">{cart.length}</span>
+                                </NavLink></li>
+
+                            </>
+                        }
 
                         <hr className='border-1 my-6' />
 
