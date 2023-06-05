@@ -2,17 +2,20 @@ import React from 'react';
 import { FaBars, FaCalendarAlt, FaEnvelope, FaHome, FaList, FaShoppingBag, FaShoppingCart, FaUsers, FaUtensils, FaWallet } from 'react-icons/fa';
 import { NavLink, Outlet } from 'react-router-dom';
 import useCart from '../hooks/useCart';
+import useAdmin from '../hooks/useAdmin';
+
 
 const Dashboard = () => {
     const [, cart] = useCart()
     // TODO: load data from the server to have dynamic isAdmin based on data
-    const isAdmin = true;
+    // const isAdmin = true;
+    const [isAdmin] = useAdmin()
     return (
         <>
 
             <div className="drawer drawer-mobile bg-[#F6F6F6]">
                 <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content my-10 mx-6 md:mx-12">
+                <div className="drawer-content py-10 mx-6 md:mx-12 ">
                     {/* Page content here */}
 
 
@@ -57,8 +60,8 @@ const Dashboard = () => {
 
                         <li><NavLink className={({ isActive }) => isActive ? 'text-white text-lg uppercase' : 'uppercase text-lg'} to='/'><FaHome></FaHome> Home</NavLink></li>
                         <li><NavLink className={({ isActive }) => isActive ? 'text-white text-lg uppercase' : 'uppercase text-lg'} to='/menu'><FaBars></FaBars> Menu</NavLink></li>
-                        <li><NavLink className={({ isActive }) => isActive ? 'text-white text-lg uppercase' : 'uppercase text-lg'} to='/shop'><FaShoppingBag></FaShoppingBag> Shop</NavLink></li>
-                        <li><NavLink className={({ isActive }) => isActive ? 'text-white text-lg uppercase' : 'uppercase text-lg'} to='contact'><FaEnvelope></FaEnvelope> Contact</NavLink></li>
+                        <li><NavLink className={({ isActive }) => isActive ? 'text-white text-lg uppercase' : 'uppercase text-lg'} to='/order/salad'><FaShoppingBag></FaShoppingBag> Shop</NavLink></li>
+                        <li><NavLink className={({ isActive }) => isActive ? 'text-white text-lg uppercase' : 'uppercase text-lg'} to='/contact'><FaEnvelope></FaEnvelope> Contact</NavLink></li>
                     </ul>
 
                 </div>
