@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import SectionTitle from '../../../components/SectionTititle/SectionTitle';
 import { FaTrashAlt } from 'react-icons/fa';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
 
 const MyCart = () => {
     const [refetch, cart] = useCart()
@@ -19,8 +20,8 @@ const MyCart = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/carts/${id}`,{
-                    method:'DELETE'
+                fetch(`http://localhost:5000/carts/${id}`, {
+                    method: 'DELETE'
                 })
                     .then(res => res.json())
                     .then(data => {
@@ -52,8 +53,10 @@ const MyCart = () => {
             <section className='bg-white py-1 px-4 rounded-md drop-shadow-lg mx-2'>
                 <div className='md:flex items-center justify-between uppercase font-semibold my-12'>
                     <h3 className="text-xl md:text-3xl">Total Items: {cart.length}</h3>
-                    <h3 className="text-xl md:text-3xl">Total Price: ${total}</h3>
-                    <button className="btn btn-sm bg-yellow-600 border-0">Pay</button>
+                    <h3 className="text-xl md:text-3xl">Total Price: ${total.toFixed(2)}</h3>
+                    <Link to='/dashboard/payment'>
+                        <button className="btn btn-sm bg-yellow-600 border-0">Pay</button>
+                    </Link>
                 </div>
                 <div className="overflow-x-auto">
                     <table className="table w-full uppercase">

@@ -39,7 +39,7 @@ const ManageItem = () => {
     return (
         <>
             <Helmet>
-                <title>Bistro Boss | My Cart</title>
+                <title>Bistro Boss | Manage Items</title>
             </Helmet>
             <SectionTitle
                 className="mt-0"

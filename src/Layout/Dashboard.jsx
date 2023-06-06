@@ -47,7 +47,7 @@ const Dashboard = () => {
 
                                 <li><NavLink className={({ isActive }) => isActive ? 'text-white text-lg uppercase' : 'uppercase text-lg'} to='/dashboard/user'><FaHome></FaHome> Users Home</NavLink></li>
                                 <li><NavLink className={({ isActive }) => isActive ? 'text-white text-lg uppercase' : 'uppercase text-lg'} to='/dashboard/reservation'><FaCalendarAlt></FaCalendarAlt> Reservation</NavLink></li>
-                                <li><NavLink className={({ isActive }) => isActive ? 'text-white text-lg uppercase' : 'uppercase text-lg'} to='/dashboard/payment'><FaWallet></FaWallet> Payment History</NavLink></li>
+                                <li><NavLink className={({ isActive }) => isActive ? 'text-white text-lg uppercase' : 'uppercase text-lg'} to='/dashboard/payment-history'><FaWallet></FaWallet> Payment History</NavLink></li>
                                 <li><NavLink className={({ isActive }) => isActive ? 'text-white text-lg uppercase' : 'uppercase text-lg'} to='/dashboard/my-cart'><FaShoppingCart></FaShoppingCart>
                                     My Cart
                                     <span className="mx-2 badge badge-secondary">{cart.length}</span>
